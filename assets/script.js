@@ -8,12 +8,66 @@ $(function () {
     // function? How can DOM traversal be used to get the "hour-x" id of the
     // time-block containing the button that was clicked? How might the id be
     // useful when saving the description in local storage?
+
+    //on click event 
+    $('.saveBtn').on("click",function(){
+      const plannedActivity = document.getElementsByClassName("description").value;
+
+      if(plannedActivity !== ''){
+        saveToLocalStorage('Activity', plannedActivity);
+
+        //saved to local storage text
+      }
+
+      
+    });
+
+    function saveToLocalStorage(key,value){
+      const jsonValue = JSON.stringify(value);
+
+      localStorage.setItem(key,jsonValue);
+    }
+
     //
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
     // attribute of each time-block be used to conditionally add or remove the
     // past, present, and future classes? How can Day.js be used to get the
     // current hour in 24-hour time?
+
+    //Current hour 
+    const now = dayjs();
+    const currentHour = now.format('HH');
+    console.log(currentHour);
+
+  function updateColor(){
+    $(".time-block").each(function(){
+      var hourBlock = $(this).attr("id");
+
+      if(currentHour){
+        $(this).addClass("present");
+      }
+      else if(hourBlock < currentHour){
+        $(this).addClass("past");
+      }
+
+
+      //if (hourBlock < currentHour){
+        //$(this).addClass("past");
+      //}
+      //else if(hourBlock === currentHour){
+        //$(this).addClass("present");
+      //}
+      //else{
+        //$(this).addClass("future");
+      //}
+    })
+  }
+
+  updateColor();
+
+
+
     //
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
@@ -21,4 +75,3 @@ $(function () {
     //
     // TODO: Add code to display the current date in the header of the page.
   });
-  
