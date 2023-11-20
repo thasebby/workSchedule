@@ -11,7 +11,7 @@ $(function () {
 
     //on click event 
     $('.saveBtn').on("click",function(){
-      const plannedActivity = document.getElementsByClassName("description").value;
+      const plannedActivity = document.getElementById("text").value;
 
       if(plannedActivity !== ''){
         saveToLocalStorage('Activity', plannedActivity);
@@ -44,11 +44,14 @@ $(function () {
     $(".time-block").each(function(){
       var hourBlock = $(this).attr("id");
 
-      if(currentHour){
+      if(hourBlock === currentHour){
         $(this).addClass("present");
       }
       else if(hourBlock < currentHour){
         $(this).addClass("past");
+      }
+      else{
+        $(this).addClass("future");
       }
 
 
@@ -74,4 +77,23 @@ $(function () {
     // attribute of each time-block be used to do this?
     //
     // TODO: Add code to display the current date in the header of the page.
+    function displayCurrentDay(){
+      var currentDate = new Date();
+
+      var DOW = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday" , "Friday", "Saturday"];
+      var weekday = DOW[currentDate.getDay()];
+
+      var allMonths = ["January" , "February", "March", "April","May","June","July","August","September","October","November","December"];
+      var month = allMonths[currentDate.getMonth()];
+
+      var day = currentDate.getDate();
+      var year = currentDate.getFullYear();
+
+      var displayDay = weekday + ':' + month + ' ' + day + ' ' + year;
+      document.getElementById('currentDay').innerText = displayDay;
+
+    }
+    displayCurrentDay();
+
   });
+
