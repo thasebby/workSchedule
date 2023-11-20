@@ -11,22 +11,17 @@ $(function () {
 
     //on click event 
     $('.saveBtn').on("click",function(){
-      const plannedActivity = document.getElementById("text").value;
+      const plannedActivity = $(this).siblings(".description").val();
+      const jsonValue = $(this).parent().attr('id');
+      localStorage.setItem(jsonValue,plannedActivity);
 
-      if(plannedActivity !== ''){
-        saveToLocalStorage('Activity', plannedActivity);
+      var popUpMessage=document.getElementById("taskSaved");
+      popUpMessage.innerHTML = "Activity saved in local storage";
 
-        //saved to local storage text
-      }
-
-      
+      setTimeout(function(){
+        popUpMessage.innerHTML = " ";
+      },2000);
     });
-
-    function saveToLocalStorage(key,value){
-      const jsonValue = JSON.stringify(value);
-
-      localStorage.setItem(key,jsonValue);
-    }
 
     //
     // TODO: Add code to apply the past, present, or future class to each time
@@ -54,17 +49,7 @@ $(function () {
         $(this).addClass("future");
       }
 
-
-      //if (hourBlock < currentHour){
-        //$(this).addClass("past");
-      //}
-      //else if(hourBlock === currentHour){
-        //$(this).addClass("present");
-      //}
-      //else{
-        //$(this).addClass("future");
-      //}
-    })
+    });
   }
 
   updateColor();
@@ -75,6 +60,19 @@ $(function () {
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
+    function showSaved(){
+      $('#9 #text').val(localStorage.getItem('9'));
+      $('#10 #text').val(localStorage.getItem('10'));
+      $('#11 #text').val(localStorage.getItem('11'));
+      $('#12 #text').val(localStorage.getItem('12'));
+      $('#13 #text').val(localStorage.getItem('13'));
+      $('#14 #text').val(localStorage.getItem('14'));
+      $('#15 #text').val(localStorage.getItem('15'));
+      $('#16 #text').val(localStorage.getItem('16'));
+      $('#17 #text').val(localStorage.getItem('17'));
+    }
+
+    showSaved();
     //
     // TODO: Add code to display the current date in the header of the page.
     function displayCurrentDay(){
