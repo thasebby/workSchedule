@@ -20,4 +20,4 @@ N/A
 
 ## Website Link
 
-[Work Schedule Link](https://thasebby.github.io/passwordGenerator/)
+[Work Schedule Link](https://thasebby.github.io/workSchedule/)
