@@ -37,10 +37,11 @@ $(function () {
 
   function updateColor(){
     $(".time-block").each(function(){
-      var hourBlock = $(this).attr("id");
+      var hourBlock = parseInt($(this).attr("id"));
 
       if(hourBlock === currentHour){
         $(this).addClass("present");
+      
       }
       else if(hourBlock < currentHour){
         $(this).addClass("past");
@@ -48,6 +49,7 @@ $(function () {
       else{
         $(this).addClass("future");
       }
+      
 
     });
   }
